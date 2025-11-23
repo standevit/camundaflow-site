@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camunda Flow – Prozessautomatisierung & BPM Experte</title>
+  <meta name="description" content="Camunda Experte aus Deutschland – Beratung, Implementierung und Custom-Entwicklung mit Camunda 8, Zeebe und Operate">
+  <link rel="stylesheet" href="/dist/styles.css">
+</head>
+<body class="min-h-screen flex flex-col">
+<div class="hidden nav-link nav-link-active"></div>
+
+  <main class="flex-1 flex items-center justify-center px-6 py-20">
+    <div class="card">
+      <h2 class="text-5xl md:text-7xl font-extrabold mb-8 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+        Camunda Flow
+      </h2>
+      <p class="text-2xl md:text-4xl mb-8 opacity-90">
+        Ihr unabhängiger Camunda-Experte aus Deutschland
+      </p>
+      <p class="text-xl md:text-2xl mb-12 text-cyan-300">
+        Camunda 8 • Zeebe • Operate • BPMN • DMN • Custom Development
+      </p>
+      <p class="text-lg max-w-2xl mx-auto leading-relaxed mb-12">
+        Ich helfe Unternehmen, komplexe Geschäftsprozesse zu automatisieren – schnell, skalierbar und zukunftssicher mit der führenden Open-Source BPMN-Engine. Von der Beratung bis zur Implementierung, ich mache Camunda für Sie zugänglich und effizient.
+      </p>
+      <a href="mailto:info@camundaflow.de" class="btn-primary mt-20 inline-block">
+        Jetzt Kontakt aufnehmen
+      </a>
+    </div>
+  </main>
+
+  <footer class="bg-black/50 py-8 text-center text-gray-400 text-sm">
+    <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de" class="underline hover:text-cyan-400">info@camundaflow.de</a></p>
+  </footer>
+
+  <script>
+    // Aktivna navigacija – highlight trenutne stranice
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage || (currentPage === '/' && link.getAttribute('href') === '/')) {
+        link.classList.add('text-cyan-400', 'font-semibold');
+      }
+    });
+  </script>
+<script src="/nav.js"></script>
+</body>
+</html>
