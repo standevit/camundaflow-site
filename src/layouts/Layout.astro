@@ -1,0 +1,19 @@
+mkdir -p src/layouts
+cat > src/layouts/Layout.astro << 'EOF'
+---
+// src/layouts/Layout.astro
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content="Camunda Flow – IT usluge & procesna automatizacija" />
+  </head>
+  <body class="bg-gray-950 text-white min-h-screen">
+    <slot /> <!-- ovde ide sav sadržaj iz index.astro -->
+  </body>
+</html>
+EOF
