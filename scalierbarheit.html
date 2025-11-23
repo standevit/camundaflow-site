@@ -7,15 +7,15 @@
   <meta name="description" content="Horizontale Skalierbarkeit mit Zeebe Engine – Vorteile für Cloud-native Workflows">
   <link rel="stylesheet" href="/dist/styles.css">
 </head>
-<body class="bg-gray-950 text-white min-h-screen flex flex-col">
-  <header class="bg-black/50 backdrop-blur-sm border-b border-cyan-900/50 sticky top-0 z-10">
+<body class="min-h-screen flex flex-col">
+  <header class="header-blur sticky top-0 z-10">
     <nav class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
       <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Camunda Flow</h1>
       <ul class="flex gap-8 text-lg">
-        <li><a href="/" class="hover:text-cyan-400 transition">Home</a></li>
+        <li><a href="/" class="nav-link">Home</a></li>
         <li><a href="/theorie.html" class="hover:text-cyan-400 transition">Theorie</a></li>
         <li><a href="/camunda.html" class="hover:text-cyan-400 transition">Was ist Camunda?</a></li>
-        <li><a href="/skalierbarkeit.html" class="text-cyan-400 font-semibold">Skalierbarkeit</a></li>
+        <li><a href="/skalierbarkeit.html" class="nav-link nav-link-active">Skalierbarkeit</a></li>
         <li><a href="/workflows.html" class="hover:text-cyan-400 transition">Workflows</a></li>
         <li><a href="/leistungen.html" class="hover:text-cyan-400 transition">Leistungen</a></li>
       </ul>
@@ -23,7 +23,7 @@
   </header>
 
   <main class="flex-1 px-6 py-20">
-    <div class="max-w-4xl mx-auto">
+    <div class="card">
       <h2 class="text-4xl md:text-5xl font-bold mb-8 text-cyan-400">Skalierbarkeit von Camunda 8 – Horizontale Skalierung für Millionen Instanzen</h2>
       <p class="text-lg mb-8 opacity-90">Camunda 8 ist cloud-native und bietet unbegrenzte horizontale Skalierbarkeit durch Zeebe Engine – ideal für hohe Lasten ohne Ausfälle. Ich erkläre die Theorie und Vorteile.</p>
 
@@ -48,7 +48,8 @@
         <p class="text-lg mt-4">Ich implementiere das für Sie – von Proof-of-Concept bis Production.</p>
       </section>
 
-      <a href="/leistungen.html" class="inline-block bg-cyan-600 hover:bg-cyan-500 px-8 py-4 rounded-lg text-xl font-semibold transition">
+      <a href="/leistungen.html" class="btn-primary mt-20 inline-block"
+>
         Meine Leistungen
       </a>
     </div>

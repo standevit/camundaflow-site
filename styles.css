@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ----------------------------------------
+   GLOBAL LIGHT THEME (Camunda-like)
+----------------------------------------- */
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+/* Header */
+.header-blur {
+  @apply bg-white/80 backdrop-blur-md border-b border-gray-200;
+}
+
+/* Navigation */
+.nav-link {
+  @apply text-gray-700 hover:text-cyan-600 transition;
+}
+
+.nav-link-active {
+  @apply text-cyan-600 font-semibold;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  @apply text-gray-900;
+}
+
+/* Accent text */
+.accent {
+  @apply text-cyan-600;
+}
+
+/* Card components */
+.card {
+  @apply bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition;
+}
+
+/* Sections with separators */
+.section-line {
+  @apply border-t border-gray-200 pt-16;
+}
+
+/* CTA buttons */
+.btn-primary {
+  @apply bg-cyan-600 hover:bg-cyan-500 text-white px-10 py-5 text-xl rounded-xl font-bold transition;
+}
+
+/* Footer */
+.footer {
+  @apply bg-gray-50 border-t border-gray-200 text-gray-500 text-sm py-8;
+}
+
