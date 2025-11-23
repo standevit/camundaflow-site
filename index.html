@@ -13,7 +13,9 @@
       <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Camunda Flow</h1>
       <ul class="flex gap-8 text-lg">
         <li><a href="/" class="hover:text-cyan-400 transition">Home</a></li>
+        <li><a href="/theorie.html" class="hover:text-cyan-400 transition">Theorie</a></li>
         <li><a href="/camunda.html" class="hover:text-cyan-400 transition">Was ist Camunda?</a></li>
+        <li><a href="/skalierbarkeit.html" class="hover:text-cyan-400 transition">Skalierbarkeit</a></li>
         <li><a href="/workflows.html" class="hover:text-cyan-400 transition">Workflows</a></li>
         <li><a href="/leistungen.html" class="hover:text-cyan-400 transition">Leistungen</a></li>
       </ul>
@@ -29,21 +31,30 @@
         Ihr unabhängiger Camunda-Experte aus Deutschland
       </p>
       <p class="text-xl md:text-2xl mb-12 text-cyan-300">
-        Camunda 8 • Zeebe • Operate • Tasklist • Optimize • Custom Development
+        Camunda 8 • Zeebe • Operate • BPMN • DMN • Custom Development
       </p>
-      <p class="text-lg max-w-2xl mx-auto leading-relaxed">
-        Ich helfe Unternehmen, komplexe Geschäftsprozesse zu automatisieren – schnell, skalierbar und zukunftssicher mit der führenden Open-Source BPMN-Engine.
+      <p class="text-lg max-w-2xl mx-auto leading-relaxed mb-12">
+        Ich helfe Unternehmen, komplexe Geschäftsprozesse zu automatisieren – schnell, skalierbar und zukunftssicher mit der führenden Open-Source BPMN-Engine. Von der Beratung bis zur Implementierung, ich mache Camunda für Sie zugänglich und effizient.
       </p>
-      <div class="mt-12">
-        <a href="mailto:info@camundaflow.de" class="inline-block bg-cyan-600 hover:bg-cyan-500 px-8 py-4 rounded-lg text-xl font-semibold transition">
-          Kontaktieren Sie mich jetzt
-        </a>
-      </div>
+      <a href="mailto:info@camundaflow.de" class="inline-block bg-cyan-600 hover:bg-cyan-500 px-8 py-4 rounded-lg text-xl font-semibold transition">
+        Jetzt Kontakt aufnehmen
+      </a>
     </div>
   </main>
 
-  <footer class="bg-black/50 py-8 text-center text-gray-400">
+  <footer class="bg-black/50 py-8 text-center text-gray-400 text-sm">
     <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de" class="underline hover:text-cyan-400">info@camundaflow.de</a></p>
   </footer>
+
+  <script>
+    // Aktivna navigacija – highlight trenutne stranice
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage || (currentPage === '/' && link.getAttribute('href') === '/')) {
+        link.classList.add('text-cyan-400', 'font-semibold');
+      }
+    });
+  </script>
 </body>
 </html>
