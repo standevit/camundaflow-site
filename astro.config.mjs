@@ -2,12 +2,12 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://camundaflow.de',  // za custom domen i ispravne putanje
-  base: '/',                       // default, ali eksplicitno
+  site: 'https://camundaflow.de',
+  base: '/',
   integrations: [
     tailwind({
       config: {
-        applyBaseStyles: true,       // ← ovo dodaje Tailwind CSS direktno u <head>
+        applyBaseStyles: true,  // ← ovo generiše Tailwind CSS direktno u <head>
       },
     }),
   ],

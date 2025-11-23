@@ -1,38 +1,33 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
-import '../styles/tailwind.css';   // ovo ostavi ako imaš svoj CSS, ali nije obavezno
+// Ukloni import '../styles/tailwind.css' ako postoji – nije potreban sa applyBaseStyles
 
 const pageTitle = "Camunda Flow – IT usluge & procesna automatizacija";
 ---
 
 <Layout title={pageTitle}>
-  <main class="max-w-5xl mx-auto text-center px-6 py-20">
-    <h1 class="text-6xl md:text-8xl font-extrabold mb-8 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
-      Camunda Flow
-    </h1>
-    <p class="text-2xl md:text-4xl mb-12 opacity-90">
-      Konsultacije • Implementacija • Custom razvoj
-    </p>
-    <p class="text-xl md:text-2xl mb-12 text-cyan-300">
-      Camunda BPM • Zeebe • Process Automation • DevOps
-    </p>
-    <div class="flex flex-col sm:flex-row gap-8 justify-center text-lg">
-      <a href="mailto:info@camundaflow.io" class="underline hover:text-cyan-400 transition">
-        info@camundaflow.io
-      </a>
-      <span class="hidden sm:inline">•</span>
-      <a href="https://linkedin.com/company/camundaflow" class="underline hover:text-cyan-400 transition" target="_blank">
-        LinkedIn
-      </a>
-    </div>
-    <p class="mt-16 text-gray-400">Sajt u izradi – uskoro portfolio i kontakt forma</p>
-  </main>
+  <body class="bg-gray-950 text-white min-h-screen flex items-center justify-center px-6">  <!-- Tailwind klase ovde -->
+    <main class="max-w-5xl mx-auto text-center">
+      <h1 class="text-6xl md:text-8xl font-extrabold mb-8 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+        Camunda Flow
+      </h1>
+      <p class="text-2xl md:text-4xl mb-12 opacity-90">
+        Konsultacije • Implementacija • Custom razvoj
+      </p>
+      <p class="text-xl md:text-2xl mb-12 text-cyan-300">
+        Camunda BPM • Zeebe • Process Automation • DevOps
+      </p>
+      <div class="flex flex-col sm:flex-row gap-8 justify-center text-lg">
+        <a href="mailto:info@camundaflow.io" class="underline hover:text-cyan-400 transition">
+          info@camundaflow.io
+        </a>
+        <span class="hidden sm:inline">•</span>
+        <a href="https://linkedin.com/company/camundaflow" class="underline hover:text-cyan-400 transition">
+          LinkedIn
+        </a>
+      </div>
+      <p class="mt-16 text-gray-400">Sajt u izradi – uskoro portfolio i kontakt forma</p>
+    </main>
+  </body>
 </Layout>
-
-<!-- OVO JE NAJVAŽNIJE – forsira Tailwind da generiše sav CSS -->
-<style is:global>
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-</style>
