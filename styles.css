@@ -39,6 +39,12 @@ h1, h2, h3, h4 {
   @apply bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition;
 }
 
+.leistungen-card {
+  @apply bg-gradient-to-br from-cyan-700 to-cyan-900
+         p-8 rounded-2xl
+         border border-cyan-900/30;
+}
+
 /* Sections with separators */
 .section-line {
   @apply border-t border-gray-200 pt-16;
