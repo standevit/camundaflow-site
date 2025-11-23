@@ -8,19 +8,9 @@
   <link rel="stylesheet" href="/dist/styles.css">
 </head>
 <body class="min-h-screen flex flex-col">
-  <header class="header-blur sticky top-0 z-10">
-    <nav class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
-      <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Camunda Flow</h1>
-      <ul class="flex gap-8 text-lg">
-        <li><a href="/" class="nav-link nav-link-active">Home</a></li>
-        <li><a href="/theorie.html" class="hover:text-cyan-400 transition">Theorie</a></li>
-        <li><a href="/camunda.html" class="hover:text-cyan-400 transition">Was ist Camunda?</a></li>
-        <li><a href="/skalierbarkeit.html" class="hover:text-cyan-400 transition">Skalierbarkeit</a></li>
-        <li><a href="/workflows.html" class="hover:text-cyan-400 transition">Workflows</a></li>
-        <li><a href="/leistungen.html" class="hover:text-cyan-400 transition">Leistungen</a></li>
-      </ul>
-    </nav>
-  </header>
+<header class="header-blur sticky top-0 z-10">
+  <div id="navigation"></div>
+</header>
 
   <main class="flex-1 flex items-center justify-center px-6 py-20">
     <div class="card">
@@ -56,5 +46,6 @@
       }
     });
   </script>
+<script src="/nav.js"></script>
 </body>
 </html>
