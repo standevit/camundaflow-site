@@ -1,4 +1,20 @@
-/* 1. Navigacija – umjesto cyan */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------------------
+   GLOBAL LIGHT THEME – bez cyan-a (indigo/purple)
+----------------------------------------- */
+body {
+  @apply bg-white text-gray-900;
+}
+
+/* Header */
+.header-blur {
+  @apply bg-white/90 backdrop-blur-md border-b border-gray-200;
+}
+
+/* Navigation */
 .nav-link {
   @apply text-gray-700 hover:text-indigo-600 transition;
 }
@@ -6,17 +22,27 @@
   @apply text-indigo-600 font-semibold;
 }
 
-/* 2. Logo u headeru */
+/* Logo u headeru */
 header h1 {
-  @apply bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent;
+  @apply text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent;
 }
 
-/* 3. Accent klasa */
+/* Headings */
+h1, h2, h3, h4 {
+  @apply text-gray-900;
+}
+
+/* Accent text */
 .accent {
   @apply text-indigo-600;
 }
 
-/* 4. Leistungen kartice – bez cyan-a */
+/* Card components */
+.card {
+  @apply bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition;
+}
+
+/* Leistungen kartice – svijetle i premium */
 .leistungen-card {
   @apply bg-gradient-to-br from-indigo-50 to-purple-50
          p-8 rounded-2xl
@@ -31,7 +57,17 @@ header h1 {
   @apply text-gray-700 leading-relaxed;
 }
 
-/* 5. Glavni CTA gumb */
+/* Sections with separators */
+.section-line {
+  @apply border-t border-gray-200 pt-16;
+}
+
+/* CTA buttons */
 .btn-primary {
-  @apply bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-5 text-xl rounded-xl font-bold transition;
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-5 text-xl rounded-xl font-bold transition shadow-lg;
+}
+
+/* Footer */
+.footer {
+  @apply bg-gray-50 border-t border-gray-200 text-gray-500 text-sm py-8;
 }
