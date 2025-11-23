@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="dist/styles.css">
 </head>
 <body class="min-h-screen flex flex-col">
-<div class="hidden nav-link nav-link-active"></div>
+<div id="navigation"></div>
 
   <main class="flex-1 px-6 py-20 text-center">
     <div class="card">
@@ -42,16 +42,6 @@
     <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de" class="underline hover:text-cyan-400">info@camundaflow.de</a></p>
   </footer>
 
-  <script>
-    // Aktivna navigacija
-    const currentPage = window.location.pathname;
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-      if (link.getAttribute('href') === currentPage || (currentPage === '/' && link.getAttribute('href') === '/')) {
-        link.classList.add('text-cyan-400', 'font-semibold');
-      }
-    });
-  </script>
 <script src="nav.js"></script>
 </body>
 </html>
