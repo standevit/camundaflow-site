@@ -7,23 +7,23 @@
   <meta name="description" content="Meine Leistungen: Camunda Beratung, Workflow-Implementierung, Migration und Schulung">
   <link rel="stylesheet" href="/dist/styles.css">
 </head>
-<body class="bg-gray-950 text-white min-h-screen flex flex-col">
-  <header class="bg-black/50 backdrop-blur-sm border-b border-cyan-900/50 sticky top-0 z-10">
+<body class="min-h-screen flex flex-col">
+  <header class="header-blur sticky top-0 z-10">
     <nav class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
       <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Camunda Flow</h1>
       <ul class="flex gap-8 text-lg">
-        <li><a href="/" class="hover:text-cyan-400 transition">Home</a></li>
+        <li><a href="/" class="nav-link">Home</a></li>
         <li><a href="/theorie.html" class="hover:text-cyan-400 transition">Theorie</a></li>
         <li><a href="/camunda.html" class="hover:text-cyan-400 transition">Was ist Camunda?</a></li>
         <li><a href="/skalierbarkeit.html" class="hover:text-cyan-400 transition">Skalierbarkeit</a></li>
         <li><a href="/workflows.html" class="hover:text-cyan-400 transition">Workflows</a></li>
-        <li><a href="/leistungen.html" class="text-cyan-400 font-semibold">Leistungen</a></li>
+        <li><a href="/leistungen.html" class="nav-link nav-link-active">Leistungen</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="flex-1 px-6 py-20 text-center">
-    <div class="max-w-4xl mx-auto">
+    <div class="card">
       <h2 class="text-5xl md:text-6xl font-extrabold mb-16 text-cyan-400">Meine Leistungen für Sie</h2>
       <p class="text-lg mb-12 opacity-90 max-w-2xl mx-auto">Als Camunda-Experte biete ich umfassende Unterstützung von der Beratung bis zur Schulung – immer praxisnah und skalierbar.</p>
       <div class="grid md:grid-cols-2 gap-10 text-left max-w-5xl mx-auto">
@@ -43,7 +43,8 @@
           <h3 class="text-2xl font-bold mb-4 text-cyan-300">Schulungen & Optimierung</h3>
           <p>Workshops für Teams, Performance-Tuning, Operate/Optimize-Setup für kontinuierliche Verbesserung.</p>
       </div>
-      <a href="mailto:info@camundaflow.de" class="mt-20 inline-block bg-cyan-600 hover:bg-cyan-500 px-12 py-6 rounded-xl text-2xl font-bold transition">
+      <a href="mailto:info@camundaflow.de" class="btn-primary mt-20 inline-block"
+>
         Unverbindlich anfragen →
       </a>
     </div>
