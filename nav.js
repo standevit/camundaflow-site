@@ -1,4 +1,4 @@
-// nav.js – konačno 100 % ispravno (identično originalu + nove boje)
+// nav.js – KONAČNA VERZIJA (logo + sve boje ispravne)
 document.addEventListener("DOMContentLoaded", () => {
   const currentPath = window.location.pathname;
 
@@ -19,7 +19,5 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
 
   const placeholder = document.getElementById("navigation");
-  if (placeholder) {
-    placeholder.outerHTML = navHTML;
-  }
+  if (placeholder) placeholder.outerHTML = navHTML;
 });

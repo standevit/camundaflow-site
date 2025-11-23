@@ -14,9 +14,9 @@ body {
   @apply bg-white/90 backdrop-blur-md border-b border-gray-200;
 }
 
-/* Navigation */
+/* --- FIX ZA MENI – aktivna stavka i hover --- */
 .nav-link {
-  @apply text-gray-700 hover:text-indigo-600 transition;
+  @apply text-gray-700 hover:text-indigo-600 transition-colors duration-200;
 }
 .nav-link-active {
   @apply text-indigo-600 font-semibold;
