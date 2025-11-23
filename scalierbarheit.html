@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skalierbarkeit von Camunda 8 – Camunda Flow</title>
+  <meta name="description" content="Horizontale Skalierbarkeit mit Zeebe Engine – Vorteile für Cloud-native Workflows">
+  <link rel="stylesheet" href="/dist/styles.css">
+</head>
+<body class="bg-gray-950 text-white min-h-screen flex flex-col">
+  <header class="bg-black/50 backdrop-blur-sm border-b border-cyan-900/50 sticky top-0 z-10">
+    <nav class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+      <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Camunda Flow</h1>
+      <ul class="flex gap-8 text-lg">
+        <li><a href="/" class="hover:text-cyan-400 transition">Home</a></li>
+        <li><a href="/theorie.html" class="hover:text-cyan-400 transition">Theorie</a></li>
+        <li><a href="/camunda.html" class="hover:text-cyan-400 transition">Was ist Camunda?</a></li>
+        <li><a href="/skalierbarkeit.html" class="text-cyan-400 font-semibold">Skalierbarkeit</a></li>
+        <li><a href="/workflows.html" class="hover:text-cyan-400 transition">Workflows</a></li>
+        <li><a href="/leistungen.html" class="hover:text-cyan-400 transition">Leistungen</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="flex-1 px-6 py-20">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-cyan-400">Skalierbarkeit von Camunda 8 – Horizontale Skalierung für Millionen Instanzen</h2>
+      <p class="text-lg mb-8 opacity-90">Camunda 8 ist cloud-native und bietet unbegrenzte horizontale Skalierbarkeit durch Zeebe Engine – ideal für hohe Lasten ohne Ausfälle. Ich erkläre die Theorie und Vorteile.</p>
+
+      <section class="mb-12">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-300">Theorie der Skalierbarkeit in Camunda 8</h3>
+        <p class="text-lg leading-relaxed">Camunda 8 basiert auf Zeebe, einer Workflow-Engine die für Microservices und Cloud-Architekturen optimiert ist. Horizontale Skalierbarkeit bedeutet: Füge mehr Nodes hinzu, um Last zu verteilen – ohne Single Point of Failure.</p>
+        <ul class="list-disc pl-8 space-y-2 text-lg mt-4">
+          <li><strong>Zeebe Engine</strong>: Verarbeitet Millionen Instanzen pro Sekunde, niedrige Latenz (ms), Failover-Architektur für 99.99% Verfügbarkeit.</li>
+          <li><strong>Event-Streaming</strong>: Zustände außerhalb der DB speichern – vermeidet I/O-Engpässe, unterstützt Kafka-Integration für Event-Driven Workflows.</li>
+          <li><strong>Kubernetes-Native</strong>: Vollständig containerisiert, auto-scaling in Cloud (AWS, Azure, GCP).</li>
+        </ul>
+        <p class="text-lg mt-4">Vorteile: Resilienz (automatische Recovery), Geschwindigkeit (keine zentrale DB-Last), Sicherheit (verteilte Architektur). Laut Forrester: Camunda reduziert Kosten um 50% bei hoher Skalierbarkeit.</p>
+      </section>
+
+      <section class="mb-12">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-300">Praktische Beispiele</h3>
+        <ul class="list-disc pl-8 space-y-2 text-lg">
+          <li><strong>Kreditprüfung</strong>: Skaliert auf 1 Mio. Anträge/Tag – Zeebe verteilt Last über Nodes, DMN für schnelle Entscheidungen.</li>
+          <li><strong>Onboarding</strong>: Langlaufende Workflows (Wochen) – Resilient gegen Ausfälle, horizontale Skalierung für Wachstum.</li>
+          <li><strong>Microservices</strong>: Orchestriert 100+ Services – Event-Streaming für asynchrone Kommunikation.</li>
+        </ul>
+        <p class="text-lg mt-4">Ich implementiere das für Sie – von Proof-of-Concept bis Production.</p>
+      </section>
+
+      <a href="/leistungen.html" class="inline-block bg-cyan-600 hover:bg-cyan-500 px-8 py-4 rounded-lg text-xl font-semibold transition">
+        Meine Leistungen
+      </a>
+    </div>
+  </main>
+
+  <footer class="bg-black/50 py-8 text-center text-gray-400 text-sm">
+    <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de" class="underline hover:text-cyan-400">info@camundaflow.de</a></p>
+  </footer>
+
+  <script>
+    // Aktivna navigacija
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage || (currentPage === '/' && link.getAttribute('href') === '/')) {
+        link.classList.add('text-cyan-400', 'font-semibold');
+      }
+    });
+  </script>
+</body>
+</html>

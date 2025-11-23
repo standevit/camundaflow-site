@@ -1,0 +1,32 @@
+{
+  "name": "camundaflow-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/standevit/camundaflow-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/standevit/camundaflow-site/issues"
+  },
+  "homepage": "https://github.com/standevit/camundaflow-site#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.14"
+  },
+"scripts": {
+  "build": "tailwindcss -i ./styles.css -o ./dist/styles.css --minify"
+}
+
+}
+
+
