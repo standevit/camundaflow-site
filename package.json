@@ -1,28 +1,14 @@
 {
   "name": "camundaflow-site",
-  "version": "1.0.0",
-  "description": "",
-  "main": "tailwind.config.js",
+  "private": true,
   "scripts": {
-    "build": "rimraf dist && mkdir dist && tailwindcss -i ./styles.css -o ./dist/styles.css --minify && cp *.html dist/ && cp nav.js dist/",
-    "dev": "tailwindcss -i ./styles.css -o ./dist/styles.css --watch"
+    "dev": "concurrently \"npx tailwindcss -i ./src/styles.css -o ./public/styles.css --watch\" \"npx live-server public --port=3000\"",
+    "build": "npx tailwindcss -i ./src/styles.css -o ./public/styles.css --minify",
+    "preview": "npm run build && npx live-server public"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/standevit/camundaflow-site.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/standevit/camundaflow-site/issues"
-  },
-  "homepage": "https://github.com/standevit/camundaflow-site#readme",
   "devDependencies": {
-    "autoprefixer": "^10.4.22",
-    "postcss": "^8.5.6",
-    "rimraf": "^6.1.2",
+    "concurrently": "^8.2.2",
+    "live-server": "^1.2.2",
     "tailwindcss": "^3.4.14"
   }
 }

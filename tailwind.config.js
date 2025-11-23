@@ -1,12 +1,12 @@
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.html",
-    "./nav.js",
-    "./**/*.html"
-  ],
-  safelist: [
-    "nav-link",
-    "nav-link-active"
+    "./public/**/*.html",   // ← ovo je najvažnije!
+    "./public/*.html",
+    "./public/*.js",
+    "./src/**/*.html",      // ← ako još imaš HTML u src
+    "./src/*.js"
   ],
   theme: {
     extend: {},
