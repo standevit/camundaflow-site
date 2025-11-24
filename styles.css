@@ -65,7 +65,7 @@ h1,h2{
 h1::after,h2::after{
   content:'';position:absolute;bottom:0;left:50%;
   transform:translateX(-50%);
-  width:60px;height:3px;background:#64748b;border-radius:2px;
+  width:860px;height:1px;background:#64748b;
 }
 
 /* Tekst */
@@ -82,10 +82,34 @@ p:nth-of-type(2){
 
 /* Liste */
 ul li{
-  list-style:none;position:relative;padding-left:1.8rem;
+  list-style:upper-roman;position:relative;padding-left:1.8rem;
   font-size:1.13rem;color:#475569;margin-bottom:1rem;
 }
 
+/* Jedinstveno poravnanje za sve sekcije – lijevo, kao na ai-agents stranici */
+.card section {
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Opcionalno: ako želiš da i naslovi unutar sekcija budu lijevo (a ne centrirani) */
+.card section h2,
+.card section h3 {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+.card section p {
+    text-align: center;
+}
+.card section h2::after,
+.card section h3::after {
+    left: 0;
+    transform: none;            /* plava crtica više nije centrirana */
+}
 
 /* Leistungen */
 .grid{display:grid;gap:1.6rem;margin:2.6rem 0}
@@ -112,7 +136,7 @@ ul li{
 }
 
 /* Footer – tanji + copyright 100% čitljiv */
-footer{
+footer {
   background:#0f172a;
   color:#e2e8f0;                    /* bijelo-siva, potpuno čitljivo */
   text-align:center;
@@ -121,11 +145,18 @@ footer{
   margin-top:auto;
   border-top:1px solid #1e293b;
 }
-footer a{
+footer p a{
   color:#e2e8f0;
   text-decoration:none;
   font-weight:500;
 }
+
+footer p {
+  color:#e2e8f0 !important;
+  text-decoration:none;
+  font-weight:500;
+}
+
 footer a:hover{
   text-decoration:underline;
 }
