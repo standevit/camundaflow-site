@@ -29,24 +29,20 @@ nav{
   max-width:1200px;margin:0 auto;padding:0 2rem;
   display:flex;align-items:center;justify-content:space-between;
 }
-.logo{
-  font-size:1.85rem;font-weight:900;
-  background:linear-gradient(90deg,#475569,#64748b);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  letter-spacing:-0.8px;text-decoration:none;
-}
 
 /* Boxed meni */
 .menu{
   display:flex;gap:0.9rem;background:#f8fafc;
   padding:0.55rem 1.1rem;border-radius:999px;
+  margin-left: 1rem;
   border:1px solid #e2e8f0;box-shadow:0 4px 15px rgba(0,0,0,0.05);
 }
 .menu a{
   color:#475569;font-weight:600;font-size:0.96rem;
   text-decoration:none;padding:0.45rem 0.95rem;
   border-radius:999px;transition:all .3s;
+  white-space: nowrap;
+  min-width: max-content;   /* forsira da link bude širok koliko treba */
 }
 .menu a:hover{background:#e2e8f0;color:#1e293b}
 .menu a.active{background:#475569;color:white;font-weight:700}
@@ -89,7 +85,7 @@ ul li{
   list-style:none;position:relative;padding-left:1.8rem;
   font-size:1.13rem;color:#475569;margin-bottom:1rem;
 }
-ul li::before{content:"→";color:#64748b;font-weight:bold;position:absolute;left:0}
+
 
 /* Leistungen */
 .grid{display:grid;gap:1.6rem;margin:2.6rem 0}
