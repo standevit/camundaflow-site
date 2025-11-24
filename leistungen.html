@@ -4,58 +4,55 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Leistungen – Camunda Flow</title>
-  <meta name="description" content="Meine Leistungen: Camunda Beratung, Workflow-Implementierung, Migration und Schulung">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="min-h-screen flex flex-col">
-<div id="navigation">
-<nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center bg-white/90 backdrop-blur border-b border-gray-200 sticky top-0 z-50">
-  <a href="/" class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent hover:from-indigo-500 hover:to-purple-500 transition">
-    Camunda Flow
-  </a>
-  <ul class="flex gap-8 text-lg font-medium">
-    <li><a href="/" class="text-gray-700 hover:text-indigo-600 transition">Home</a></li>
-    <li><a href="/theorie.html" class="text-gray-700 hover:text-indigo-600 transition">Theorie</a></li>
-    <li><a href="/camunda.html" class="text-gray-700 hover:text-indigo-600 transition ">Was ist Camunda?</a></li>
-    <li><a href="/skalierbarkeit.html" class="text-gray-700 hover:text-indigo-600 transition">Skalierbarkeit</a></li>
-    <li><a href="/workflows.html" class="text-gray-700 hover:text-indigo-600 transition">Workflows</a></li>
-    <li><a href="/leistungen.html" class="text-gray-700 hover:text-indigo-600 transition font-bold text-indigo-600">Leistungen</a></li>
-  </ul>
-</nav>
-</div>
-
-  <main class="flex-1 px-6 py-20 text-center">
-    <div class="card">
-      <h2 class="text-5xl md:text-6xl font-extrabold mb-16 text-cyan-400">Meine Leistungen für Sie</h2>
-      <p class="text-lg mb-12 opacity-90 max-w-2xl mx-auto">Als Camunda-Experte biete ich umfassende Unterstützung von der Beratung bis zur Schulung – immer praxisnah und skalierbar.</p>
-      <div class="grid md:grid-cols-2 gap-10 text-left max-w-5xl mx-auto">
-        <div class="leistungen-card">
-          <h3 class="text-2xl font-bold mb-4 text-cyan-300">Architektur-Beratung</h3>
-          <p>Konzeption von Camunda-8-Lösungen für Microservices, inkl. Skalierbarkeitsanalyse und Integration mit Kafka.</p>
-        </div>
-        <div class="leistungen-card">
-          <h3 class="text-2xl font-bold mb-4 text-cyan-300">Workflow-Implementierung</h3>
-          <p>BPMN-Modellierung, DMN-Entscheidungen, Custom Connectors in Java/Node.js – von POC bis Production.</p>
-        </div>
-        <div class="leistungen-card">
-          <h3 class="text-2xl font-bold mb-4 text-cyan-300">Migration 7 → 8</h3>
-          <p>Sichere Migration bestehender Prozesse, mit Minimal-Downtime und Test-Automatisierung.</p>
-        </div>
-        <div class="leistungen-card">
-          <h3 class="text-2xl font-bold mb-4 text-cyan-300">Schulungen & Optimierung</h3>
-          <p>Workshops für Teams, Performance-Tuning, Operate/Optimize-Setup für kontinuierliche Verbesserung.</p>
-      </div>
-      <a href="mailto:info@camundaflow.de" class="btn-primary mt-20 inline-block"
->
-        Unverbindlich anfragen →
-      </a>
+<body>
+<header>
+  <nav>
+    <a href="/" class="logo">Camunda Flow</a>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="theorie.html">Theorie</a>
+      <a href="camunda.html">Was ist Camunda?</a>
+      <a href="skalierbarkeit.html">Skalierbarkeit</a>
+      <a href="workflows.html">Workflows</a>
+      <a href="leistungen.html" class="active">Leistungen</a>
     </div>
-  </main>
+  </nav>
+</header>
 
-  <footer class="bg-black/50 py-8 text-center text-gray-400 text-sm">
-    <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de" class="underline hover:text-cyan-400">info@camundaflow.de</a></p>
-  </footer>
+<main>
+  <div class="card">
+    <h2>Meine Leistungen</h2>
+    <p style="text-align:center;max-width:800px;margin:0 auto 3rem">
+      Von der Beratung bis zur produktiven Lösung – alles aus einer Hand.
+    </p>
 
-<script src="nav.js"></script>
+    <div class="grid">
+      <div class="leistungen-card">
+        <h3>Architektur-Beratung</h3>
+        <p>Konzeption skalierbarer Camunda-8-Lösungen inkl. Integration mit Kafka & Microservices</p>
+      </div>
+      <div class="leistungen-card">
+        <h3>Implementierung</h3>
+        <p>BPMN-Modellierung, DMN-Regeln, Custom Connectors (Java/Node.js), POC bis Production</p>
+      </div>
+      <div class="leistungen-card">
+        <h3>Migration Camunda 7 → 8</h3>
+        <p>Sichere Migration mit minimaler Downtime und automatisierter Tests</p>
+      </div>
+      <div class="leistungen-card">
+        <h3>Schulungen & Optimierung</h3>
+        <p>Workshops für Entwickler & Fachabteilungen, Performance-Tuning, Operate/Optimize-Setup</p>
+      </div>
+    </div>
+
+    <a href="mailto:info@camundaflow.de" class="btn-primary">Unverbindlich anfragen →</a>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de">info@camundaflow.de</a></p>
+</footer>
 </body>
 </html>

@@ -1,67 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-body {
-  @apply bg-white text-gray-900 antialiased;
-}
-
-/* Header – blur efekat i lijepljivi */
-.header-blur {
-  @apply sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200;
-}
-
-/* Navigacija – veći razmak između logoa i menija */
-nav {
-  @apply max-w-6xl mx-auto px-6 py-8 flex items-center justify-between;
-}
-
-/* Logo – malo veći razmak desno */
-nav a:first-child {
-  @apply mr-16; /* ovdje je ključ za razmak između "Camunda Flow" i menija */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:#fafafa;
+  color:#1e293b;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;min-height:100vh;
+  position:relative;
 }
 
-/* Nav linkovi */
-.nav-link {
-  @apply text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200;
-}
-.nav-link-active {
-  @apply text-indigo-600 font-semibold;
-}
-
-/* Glavni naslov na početnoj – bez ciana */
-.hero-title {
-  @apply text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent;
+/* Nježne sive horizontalne linije preko cijele stranice */
+body::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 60px,#e2e8f0 60px,#e2e8f0 61px);
+  pointer-events:none;z-index:-1;opacity:0.25;
 }
 
-/* Kartice */
-.card {
-  @apply bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow;
+/* Header */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,0.98);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid #e2e8f0;
+  padding:1.2rem 0;
+}
+nav{
+  max-width:1200px;margin:0 auto;padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-size:2rem;
+  font-weight:900;
+  background:linear-gradient(90deg,#64748b,#475569);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  letter-spacing:-0.8px;
+  text-decoration:none;
 }
 
-/* Leistungen kartice – nježnija indigo/purple pozadina bez pretjerivanja */
-.leistungen-card {
-  @apply bg-gradient-to-br from-indigo-50 to-purple-50 
-         border border-indigo-200 
-         rounded-2xl p-8 
-         shadow-xl;
+/* Meni sa donjim borderom */
+.menu{
+  display:flex;gap:2.8rem;
 }
-.leistungen-card h3 {
-  @apply text-xl md:text-2xl font-bold text-indigo-700 mb-4;
+.menu a{
+  color:#475569;font-weight:600;font-size:1.05rem;
+  text-decoration:none;padding-bottom:0.5rem;
+  position:relative;transition:all .3s;
 }
-.leistungen-card p {
-  @apply text-gray-700 leading-relaxed;
+.menu a:hover{color:#475569}
+.menu a.active{color:#1e293b;font-weight:700}
+.menu a::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:2px;background:#64748b;border-radius:2px;
+  transform:scaleX(0);transition:transform .3s ease;
+}
+.menu a:hover::after,
+.menu a.active::after{transform:scaleX(1)}
+
+/* Main & Card */
+main{flex:1;padding:6rem 1rem 5rem;max-width:1000px;margin:0 auto;width1:100%}
+.card{
+  background:white;padding:4rem 3rem;border-radius:1.5rem;
+  box-shadow:0 12px 40px rgba(0,0,0,0.07);
+  border:1px solid #e2e8f0;
+  text-align:center;
 }
 
-/* Primarni CTA gumb */
-.btn-primary {
-  @apply inline-block bg-indigo-600 hover:bg-indigo-700 
-         text-white font-bold text-xl 
-         px-10 py-5 rounded-xl 
-         shadow-lg transition-colors;
+/* Naslovi – manji i s tankom sivom linijom */
+h1,h2{
+  font-weight:900;color:#0f172a;text-align:center;
+  position:relative;padding-bottom:1.2rem;margin-bottom:2.5rem;
+}
+h1{font-size:3rem}     /* značajno smanjen */
+h2{font-size:2.5rem}
+h1::after,h2::after{
+  content:'';position:absolute;bottom:0;left:50%;
+  transform:translateX(-50%);
+  width:70px;height:3px;background:#64748b;
+  border-radius:2px;
+}
+
+/* Tekst */
+p{
+  font-size:1.15rem;color:#475569;margin-bottom:1.3rem;
+  max-width:720px;margin-left:auto;margin-right:auto;
+}
+p:first-of-type{
+  font-size:1.35rem;color:#1e293b;margin-bottom:1.5rem;
+}
+p:nth-of-type(2){
+  font-size:1.25rem;color:#64748b;font-weight:600;margin-bottom:2rem;
+}
+
+/* Liste */
+ul li{
+  list-style:none;position:relative;padding-left:1.8rem;
+  font-size:1.15rem;color:#475569;margin-bottom:1rem;
+}
+ul li::before{
+  content:"→";color:#64748b;font-weight:bold;position:absolute;left:0;
+}
+
+/* Leistungen grid */
+.grid{display:grid;gap:1.8rem;margin:3rem 0}
+@media(min-width:768px){.grid{grid-template-columns:repeat(2,1fr)}}
+.leistungen-card{
+  background:#f8fafc;padding:2rem;border-radius:1rem;
+  border-left:4px solid #64748b;text-align:left;
+  transition:all .3s;
+}
+.leistungen-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 35px rgba(100,116,139,0.12);
+}
+.leistungen-card h3{
+  color:#1e293b;font-size:1.45rem;margin-bottom:0.8rem;
+}
+
+/* Gumb – manji, sivi akcenti */
+.btn-primary{
+  display:inline-block;
+  background:#475569;
+  color:white;
+  font-weight:700;
+  font-size:1.1rem;
+  padding:0.85rem 2.6rem;
+  border-radius:999px;
+  text-decoration:none;
+  box-shadow:0 8px 25px rgba(71,85,105,0.3);
+  transition:all .3s;
+  margin:2.5rem auto 0;
+}
+.btn-primary:hover{
+  background:#334155;
+  transform:translateY(-3px);
+  box-shadow:0 12px 35px rgba(71,85,105,0.4);
 }
 
 /* Footer */
-footer {
-  @apply bg-gray-900/95 text-gray-400 text-sm py-8 text-center;
+footer{
+  background:#0f172a;color:#94a3b8;text-align:center;
+  padding:3rem 1rem;font-size:0.95rem;margin-top:auto;
 }
-footer a {
-  @apply underline hover:text-indigo-400 transition;
+footer a{color:#cbd5e1;text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+/* Responsive */
+@media(max-width:768px){
+  .logo{font-size:1.7rem}
+  .menu{gap:1.4rem;font-size:1rem}
+  h1{font-size:2.6rem}
+  h2{font-size:2.2rem}
+  .card{padding:3rem 2rem}
 }

@@ -3,55 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Workflows & Beispiele – Camunda Flow</title>
-  <meta name="description" content="Praktische Workflow-Beispiele mit BPMN und DMN in Camunda 8">
+  <title>Workflow-Beispiele – Camunda Flow</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="min-h-screen flex flex-col">
-<div id="navigation">
-<nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center bg-white/90 backdrop-blur border-b border-gray-200 sticky top-0 z-50">
-  <a href="/" class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent hover:from-indigo-500 hover:to-purple-500 transition">
-    Camunda Flow
-  </a>
-  <ul class="flex gap-8 text-lg font-medium">
-    <li><a href="/" class="text-gray-700 hover:text-indigo-600 transition">Home</a></li>
-    <li><a href="/theorie.html" class="text-gray-700 hover:text-indigo-600 transition ">Theorie</a></li>
-    <li><a href="/camunda.html" class="text-gray-700 hover:text-indigo-600 transition ">Was ist Camunda?</a></li>
-    <li><a href="/skalierbarkeit.html" class="text-gray-700 hover:text-indigo-600 transition ">Skalierbarkeit</a></li>
-    <li><a href="/workflows.html" class="text-gray-700 hover:text-indigo-600 transition font-bold text-indigo-600">Workflows</a></li>
-    <li><a href="/leistungen.html" class="text-gray-700 hover:text-indigo-600 transition ">Leistungen</a></li>
-  </ul>
-</nav>
-</div>
-
-  <main class="flex-1 px-6 py-20">
-    <div class="card">
-      <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-cyan-400">Workflow-Beispiele in Camunda</h2>
-      <p class="text-lg mb-8 text-center opacity-90">Praktische Anwendungen von BPMN und DMN – von Theorie zur Praxis, wie ich es für Kunden umsetze.</p>
-
-      <section class="mb-12">
-        <h3 class="text-2xl font-bold mb-4 text-cyan-300">Beispiel 1: Kreditprüfung (BPMN + DMN)</h3>
-        <p class="text-lg leading-relaxed">Start Event: Antrag eingeht. User Task: Daten prüfen. DMN Decision Table: Risiko berechnen (Input: Einkommen, Alter → Output: Genehmigung). Exclusive Gateway: Ja/Nein. Wenn Ja – End Event.</p>
-        <p class="text-lg mt-4">Theorie: BPMN für Flow, DMN für Regeln (FEEL-Expressions). Skaliert auf 1 Mio. Anträge/Tag mit Zeebe.</p>
-      </section>
-
-      <section class="mb-12">
-        <h3 class="text-2xl font-bold mb-4 text-cyan-300">Beispiel 2: Onboarding (Langlaufender Workflow)</h3>
-        <p class="text-lg leading-relaxed">BPMN: Start mit E-Mail. Parallel Tasks: IT-Zugang, HR-Papiere. Timer Event: 7 Tage Wartezeit. DMN: Automatische Zuweisung basierend auf Rolle.</p>
-        <p class="text-lg mt-4">Theorie: BPMN für parallele Pfade, DMN für dynamische Entscheidungen. Resilient gegen Ausfälle – ich implementiere das für Sie.</p>
-      </section>
-
-      <a href="/leistungen.html" class="btn-primary mt-20 inline-block">
-
-        Meine Implementierungen
-      </a>
+<body>
+<header>
+  <nav>
+    <a href="/" class="logo">Camunda Flow</a>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="theorie.html">Theorie</a>
+      <a href="camunda.html">Was ist Camunda?</a>
+      <a href="skalierbarkeit.html">Skalierbarkeit</a>
+      <a href="workflows.html" class="active">Workflows</a>
+      <a href="leistungen.html">Leistungen</a>
     </div>
-  </main>
+  </nav>
+</header>
 
-  <footer class="bg-black/50 py-8 text-center text-gray-400 text-sm">
-    <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de" class="underline hover:text-cyan-400">info@camundaflow.de</a></p>
-  </footer>
+<main>
+  <div class="card">
+    <h2>Praxisbeispiele aus meiner Arbeit</h2>
+    <p style="text-align:center;max-width:800px;margin:0 auto 3rem">
+      Von der Idee bis zur produktiven Lösung – so setze ich Camunda für Kunden um.
+    </p>
 
-<script src="nav.js"></script>
+    <section>
+      <h3>Kreditprüfung (BPMN + DMN)</h3>
+      <p>Start → User Task → DMN-Risikobewertung → Gateway → Genehmigung/Abgelehnt</p>
+      <p>Skaliert auf über 1 Million Anträge pro Tag.</p>
+    </section>
+
+    <section>
+      <h3>Mitarbeiter-Onboarding</h3>
+      <p>Parallel Tasks (IT, HR, Welcome), Timer Events, dynamische Zuweisung via DMN</p>
+      <p>Langlaufend, resilient, voll automatisiert.</p>
+    </section>
+
+    <a href="leistungen.html" class="btn-primary">So kann ich auch Ihnen helfen →</a>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de">info@camundaflow.de</a></p>
+</footer>
 </body>
 </html>
