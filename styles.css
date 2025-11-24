@@ -1,12 +1,4 @@
-/* styles.css – očišćena i pojednostavljena verzija */
-/* Tailwind direktive */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-/* ----------------------------------------
-   GLOBAL LIGHT THEME – samo indigo / purple
------------------------------------------ */
 body {
   @apply bg-white text-gray-900 antialiased;
 }
