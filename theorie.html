@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Theorie: BPMN & DMN – Camunda Flow</title>
-  <meta name="description" content="Grundlagen von BPMN und DMN – Theorie und Beispiele">
+  <title>Theorie: BPMN – Camunda Flow</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- bpmn-js viewer sa zumiranjem i pomjeranjem -->
+  <script src="https://unpkg.com/bpmn-js@17.8.1/dist/bpmn-navigated-viewer.production.min.js"></script>
 </head>
 <body class="home">
+
 <header>
   <nav>
-      <nav>
-<a href="index.html" class="logo">
-  <img src="logo.svg" alt="Camunda Flow" height="46">
-</a>
+    <a href="index.html" class="logo"><img src="logo.svg" alt="Camunda Flow" height="46"></a>
     <div class="menu">
       <a href="index.html">Home</a>
       <a href="theorie.html" class="active">Theorie</a>
@@ -28,31 +28,20 @@
 
 <main>
   <div class="card">
-    <h2>Theorie: BPMN & DMN</h2>
+    <h2>Theorie: BPMN</h2>
     <p style="text-align:center;max-width:800px;margin:0 auto 3rem">
-      Grundlagen der Workflow- und Entscheidungsmodellierung – einfach und praxisnah erklärt.
+      Grundlagen der Prozessmodellierung – mit interaktivem Beispiel.
     </p>
 
-    <section style="margin:3rem 0;text-align:left;max-width:800px;margin-left:auto;margin-right:auto">
-      <h3>BPMN – Prozesse modellieren</h3>
-      <p>BPMN ist der ISO-Standard für grafische Prozessmodellierung mit Events, Tasks, Gateways und Lanes.</p>
-      <ul>
-        <li><strong>Events</strong>: Start, Intermediate, End</li>
-        <li><strong>Tasks</strong>: User Task, Service Task, Script Task</li>
-        <li><strong>Gateways</strong>: Exclusive, Parallel, Inclusive</li>
-      </ul>
-      <p>Beispiel: Pizza-Bestellung – Gast → Kellner → Koch.</p>
-    </section>
+    <h3 style="text-align:center;margin:4.5rem 0 2rem;font-size:2.2rem">
+      Interaktives BPMN-Beispiel: Pizza-Bestellung
+    </h3>
+    <p style="text-align:center;color:#555;margin-bottom:3rem">
+      Zoomen (Mausrad) • Verschieben (Linksklick + ziehen) • Funktioniert lokal ohne Server
+    </p>
 
-    <section>
-      <h3>DMN – Entscheidungen modellieren</h3>
-      <p>DMN verwendet Decision Tables und FEEL für klare Geschäftsregeln.</p>
-      <ul>
-        <li>Input → Output mit Hit Policy (Unique, First, Collect)</li>
-        <li>Perfekt kombinierbar mit BPMN via Business Rule Task</li>
-      </ul>
-      <p>Beispiel: Rabattberechnung basierend auf Kunde & Bestellwert.</p>
-    </section>
+    <!-- Ovdje se prikazuje dijagram -->
+    <div id="bpmn-container" class="bpmn-container"></div>
 
     <a href="camunda.html" class="btn-primary">Weiter zu Camunda 8 →</a>
   </div>
@@ -61,5 +50,26 @@
 <footer>
   <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de">info@camundaflow.de</a></p>
 </footer>
+
+<script>
+// JEDINI TRIKA KOJI 100 % RADI LOKALNO 2025. GODINE
+// Čita sadržaj fajla pizza.bpmn preko <embed> taga (browser dozvoljava)
+const embed = document.createElement("embed");
+embed.src = "pizza.bpmn";
+embed.type = "text/xml";
+embed.style.display = "none";
+document.body.appendChild(embed);
+
+embed.onload = () => {
+  const xml = embed.getSVGDocument()?.documentElement?.outerHTML || new XMLSerializer().serializeToString(embed.getSVGDocument()?.documentElement || embed);
+  
+  // Ako nije SVG (jer je BPMN XML), uzimamo direktno response
+  // bpmn-js sam zna da učita iz stringa
+  new BpmnJS({ container: "#bpmn-container" }).importXML(xml).then(({ warnings }) => {
+    if (warnings.length) console.warn(warnings);
+    BpmnJS.instances[0].get("canvas").zoom("fit-viewport");
+  });
+};
+</script>
 </body>
 </html>
