@@ -4,52 +4,41 @@
                   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
                   xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
                   xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
-                  id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
-
-  <bpmn:collaboration>
-    <bpmn:participant id="Gast" name="Gast" processRef="P1"/>
-    <bpmn:participant id="Kellner" name="Kellner" processRef="P2"/>
-    <bpmn:participant id="Koch" name="Koch" processRef="P3"/>
+                  id="Pizza" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="C">
+    <bpmn:participant id="Gast" name="Gast" processRef="PG"/>
+    <bpmn:participant id="K" name="Kellner" processRef="PK"/>
+    <bpmn:participant id="Ko" name="Koch" processRef="PKo"/>
   </bpmn:collaboration>
-
-  <bpmn:process id="P1">
-    <bpmn:laneSet><bpmn:lane id="L1" name="Gast"/></bpmn:laneSet>
-    <bpmn:startEvent id="Start" name="Ich hab Hunger"><bpmn:outgoing>f1</bpmn:outgoing></bpmn:startEvent>
-    <bpmn:userTask id="Bestellen" name="Pizza bestellen"><bpmn:incoming>f1</bpmn:incoming><bpmn:outgoing>f2</bpmn:outgoing></bpmn:userTask>
+  <bpmn:process id="PG"><bpmn:laneSet><bpmn:lane id="L1" name="Gast"/></bpmn:laneSet>
+    <bpmn:startEvent id="S"><bpmn:outgoing>f1</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:userTask id="B" name="Pizza bestellen"><bpmn:incoming>f1</bpmn:incoming><bpmn:outgoing>f2</bpmn:outgoing></bpmn:userTask>
   </bpmn:process>
-
-  <bpmn:process id="P2">
-    <bpmn:laneSet><bpmn:lane id="L2" name="Kellner"/></bpmn:laneSet>
-    <bpmn:userTask id="Aufnehmen" name="Bestellung aufnehmen"><bpmn:incoming>f2</bpmn:incoming><bpmn:outgoing>f3</bpmn:outgoing></bpmn:userTask>
-    <bpmn:userTask id="Servieren" name="Pizza servieren"><bpmn:incoming>f5</bpmn:incoming></bpmn:userTask>
+  <bpmn:process id="PK"><bpmn:laneSet><bpmn:lane id="L2" name="Kellner"/></bpmn:laneSet>
+    <bpmn:userTask id="A" name="Bestellung aufnehmen"><bpmn:incoming>f2</bpmn:incoming><bpmn:outgoing>f3</bpmn:outgoing></bpmn:userTask>
+    <bpmn:userTask id="Serv" name="Pizza servieren"><bpmn:incoming>f5</bpmn:incoming></bpmn:userTask>
   </bpmn:process>
-
-  <bpmn:process id="P3">
-    <bpmn:laneSet><bpmn:lane id="L3" name="Koch"/></bpmn:laneSet>
-    <bpmn:serviceTask id="Backen" name="Pizza backen"><bpmn:incoming>f3</bpmn:incoming><bpmn:outgoing>f5</bpmn:outgoing></bpmn:serviceTask>
+  <bpmn:process id="PKo"><bpmn:laneSet><bpmn:lane id="L3" name="Koch"/></bpmn:laneSet>
+    <bpmn:serviceTask id="Back" name="Pizza backen"><bpmn:incoming>f3</bpmn:incoming><bpmn:outgoing>f5</bpmn:outgoing></bpmn:serviceTask>
   </bpmn:process>
-
-  <bpmn:sequenceFlow id="f1" sourceRef="Start" targetRef="Bestellen"/>
-  <bpmn:sequenceFlow id="f2" sourceRef="Bestellen" targetRef="Aufnehmen"/>
-  <bpmn:sequenceFlow id="f3" sourceRef="Aufnehmen" targetRef="Backen"/>
-  <bpmn:sequenceFlow id="f5" sourceRef="Backen" targetRef="Servieren"/>
-
+  <bpmn:sequenceFlow id="f1" sourceRef="S" targetRef="B"/>
+  <bpmn:sequenceFlow id="f2" sourceRef="B" targetRef="A"/>
+  <bpmn:sequenceFlow id="f3" sourceRef="A" targetRef="Back"/>
+  <bpmn:sequenceFlow id="f5" sourceRef="Back" targetRef="Serv"/>
   <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="Collaboration">
-      <bpmndi:BPMNShape id="Gast" bpmnElement="Gast" isHorizontal="true"><dc:Bounds x="120" y="80" width="800" height="180"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Kellner" bpmnElement="Kellner" isHorizontal="true"><dc:Bounds x="120" y="280" width="800" height="180"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Koch" bpmnElement="Koch" isHorizontal="true"><dc:Bounds x="120" y="480" width="800" height="180"/></bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start"><dc:Bounds x="182" y="152" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Bestellen_di" bpmnElement="Bestellen"><dc:Bounds x="280" y="130" width="100" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Aufnehmen_di" bpmnElement="Aufnehmen"><dc:Bounds x="280" y="330" width="100" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Backen_di" bpmnElement="Backen"><dc:Bounds x="280" y="530" width="100" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Servieren_di" bpmnElement="Servieren"><dc:Bounds x="480" y="330" width="100" height="80"/></bpmndi:BPMNShape>
-
-      <bpmndi:BPMNEdge id="f1_di" bpmnElement="f1"><di:waypoint x="218" y="170"/><di:waypoint x="280" y="170"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f2_di" bpmnElement="f2"><di:waypoint x="380" y="170"/><di:waypoint x="330" y="170"/><di:waypoint x="330" y="370"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f3_di" bpmnElement="f3"><di:waypoint x="330" y="410"/><di:waypoint x="330" y="530"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f5_di" bpmnElement="f5"><di:waypoint x="330" y="570"/><di:waypoint x="480" y="370"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNPlane bpmnElement="C">
+      <bpmndi:BPMNShape id="G" bpmnElement="G" isHorizontal="true"><dc:Bounds x="100" y="60" width="900" height="180"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="K" bpmnElement="K" isHorizontal="true"><dc:Bounds x="100" y="260" width="900" height="180"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Ko" bpmnElement="Ko" isHorizontal="true"><dc:Bounds x="100" y="460" width="900" height="180"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_di" bpmnElement="S"><dc:Bounds x="160" y="132" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_di" bpmnElement="B"><dc:Bounds x="280" y="110" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A_di" bpmnElement="A"><dc:Bounds x="280" y="310" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Back_di" bpmnElement="Back"><dc:Bounds x="480" y="510" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Serv_di" bpmnElement="Serv"><dc:Bounds x="680" y="310" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1_di" bpmnElement="f1"><di:waypoint x="196" y="150"/><di:waypoint x="280" y="150"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2_di" bpmnElement="f2"><di:waypoint x="380" y="150"/><di:waypoint x="330" y="150"/><di:waypoint x="330" y="350"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3_di" bpmnElement="f3"><di:waypoint x="330" y="390"/><di:waypoint x="530" y="390"/><di:waypoint x="530" y="510"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5_di" bpmnElement="f5"><di:waypoint x="580" y="550"/><di:waypoint x="730" y="550"/><di:waypoint x="730" y="390"/></bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

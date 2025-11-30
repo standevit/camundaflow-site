@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Theorie: BPMN – Camunda Flow</title>
   <link rel="stylesheet" href="styles.css">
-
-  <!-- bpmn-js viewer sa zumiranjem i pomjeranjem -->
   <script src="https://unpkg.com/bpmn-js@17.8.1/dist/bpmn-navigated-viewer.production.min.js"></script>
+  <style>
+    .bpmn-container {
+      width: 100%;
+      height: 720px;
+      max-width: 1100px;
+      margin: 4rem auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      background: #fff;
+    }
+  </style>
 </head>
 <body class="home">
 
@@ -28,22 +38,38 @@
 
 <main>
   <div class="card">
-    <h2>Theorie: BPMN</h2>
-    <p style="text-align:center;max-width:800px;margin:0 auto 3rem">
-      Grundlagen der Prozessmodellierung – mit interaktivem Beispiel.
-    </p>
 
-    <h3 style="text-align:center;margin:4.5rem 0 2rem;font-size:2.2rem">
-      Interaktives BPMN-Beispiel: Pizza-Bestellung
+    <h2>Theorie: BPMN 2.0</h2>
+
+    <section style="text-align:left;max-width:900px;margin:3rem auto;line-height:1.7">
+      <h3>Was ist BPMN?</h3>
+      <p><strong>Business Process Model and Notation (BPMN 2.0)</strong> ist der weltweite Standard zur grafischen Darstellung von Geschäftsprozessen. Er ermöglicht es Fachabteilungen und IT, Prozesse einheitlich zu modellieren, zu verstehen und automatisieren.</p>
+
+      <h3>Wichtige Elemente</h3>
+      <ul>
+        <li><strong>Events</strong> (Kreise) – Start-, Zwischen- und Endereignisse</li>
+        <li><strong>Tasks</strong> (abgerundete Rechtecke) – Arbeitsschritte</li>
+        <li><strong>Gateways</strong> (Diamanten) – Entscheidungen</li>
+        <li><strong>Swimlanes</strong> – Zuständigkeiten</li>
+      </ul>
+
+      <h3>Vorteile</h3>
+      <p>Standardisiert · Direkt ausführbar in Camunda · Verständlich für Mensch und Maschine</p>
+    </section>
+
+    <h3 style="text-align:center;margin:5rem 0 2rem;font-size:2.3rem">
+      Interaktives Beispiel: Pizza-Bestellung
     </h3>
     <p style="text-align:center;color:#555;margin-bottom:3rem">
-      Zoomen (Mausrad) • Verschieben (Linksklick + ziehen) • Funktioniert lokal ohne Server
+      Zoomen mit Mausrad • Verschieben mit Linksklick + Ziehen
     </p>
 
-    <!-- Ovdje se prikazuje dijagram -->
-    <div id="bpmn-container" class="bpmn-container"></div>
+    <div id="canvas" class="bpmn-container"></div>
 
-    <a href="camunda.html" class="btn-primary">Weiter zu Camunda 8 →</a>
+    <div style="text-align:center;margin:4rem 0">
+      <a href="camunda.html" class="btn-primary">Weiter: Was ist Camunda 8? →</a>
+    </div>
+
   </div>
 </main>
 
@@ -52,24 +78,55 @@
 </footer>
 
 <script>
-// JEDINI TRIKA KOJI 100 % RADI LOKALNO 2025. GODINE
-// Čita sadržaj fajla pizza.bpmn preko <embed> taga (browser dozvoljava)
-const embed = document.createElement("embed");
-embed.src = "pizza.bpmn";
-embed.type = "text/xml";
-embed.style.display = "none";
-document.body.appendChild(embed);
+const bpmnXML = `<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  id="Pizza" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="C">
+    <bpmn:participant id="Gast" name="Gast" processRef="PG"/>
+    <bpmn:participant id="K" name="Kellner" processRef="PK"/>
+    <bpmn:participant id="Ko" name="Koch" processRef="PKo"/>
+  </bpmn:collaboration>
+  <bpmn:process id="PG"><bpmn:laneSet><bpmn:lane id="L1" name="Gast"/></bpmn:laneSet>
+    <bpmn:startEvent id="S" name="Ich hab Hunger"><bpmn:outgoing>f1</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:userTask id="B" name="Pizza bestellen"><bpmn:incoming>f1</bpmn:incoming><bpmn:outgoing>f2</bpmn:outgoing></bpmn:userTask>
+  </bpmn:process>
+  <bpmn:process id="PK"><bpmn:laneSet><bpmn:lane id="L2" name="Kellner"/></bpmn:laneSet>
+    <bpmn:userTask id="A" name="Bestellung aufnehmen"><bpmn:incoming>f2</bpmn:incoming><bpmn:outgoing>f3</bpmn:outgoing></bpmn:userTask>
+    <bpmn:userTask id="Serv" name="Pizza servieren"><bpmn:incoming>f5</bpmn:incoming></bpmn:userTask>
+  </bpmn:process>
+  <bpmn:process id="PKo"><bpmn:laneSet><bpmn:lane id="L3" name="Koch"/></bpmn:laneSet>
+    <bpmn:serviceTask id="Back" name="Pizza backen"><bpmn:incoming>f3</bpmn:incoming><bpmn:outgoing>f5</bpmn:outgoing></bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:sequenceFlow id="f1" sourceRef="S" targetRef="B"/>
+  <bpmn:sequenceFlow id="f2" sourceRef="B" targetRef="A"/>
+  <bpmn:sequenceFlow id="f3" sourceRef="sat" targetRef="Back"/>
+  <bpmn:sequenceFlow id="f5" sourceRef="Back" targetRef="Serv"/>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="C">
+      <bpmndi:BPMNShape id="G" bpmnElement="Gast" isHorizontal="true"><dc:Bounds x="100" y="60" width="900" height="180"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="K" bpmnElement="K" isHorizontal="true"><dc:Bounds x="100" y="260" width="900" height="180"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Ko" bpmnElement="Ko" isHorizontal="true"><dc:Bounds x="100" y="460" width="900" height="180"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_di" bpmnElement="S"><dc:Bounds x="160" y="132" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_di" bpmnElement="B"><dc:Bounds x="280" y="110" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A_di" bpmnElement="A"><dc:Bounds x="280" y="310" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Back_di" bpmnElement="Back"><dc:Bounds x="480" y="510" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Serv_di" bpmnElement="Serv"><dc:Bounds x="680" y="310" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1_di" bpmnElement="f1"><di:waypoint x="196" y="150"/><di:waypoint x="280" y="150"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2_di" bpmnElement="f2"><di:waypoint x="380" y="150"/><di:waypoint x="330" y="150"/><di:waypoint x="330" y="350"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3_di" bpmnElement="f3"><di:waypoint x="330" y="390"/><di:waypoint x="530" y="390"/><di:waypoint x="530" y="510"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5_di" bpmnElement="f5"><di:waypoint x="580" y="550"/><di:waypoint x="730" y="550"/><di:waypoint x="730" y="390"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>`;
 
-embed.onload = () => {
-  const xml = embed.getSVGDocument()?.documentElement?.outerHTML || new XMLSerializer().serializeToString(embed.getSVGDocument()?.documentElement || embed);
-  
-  // Ako nije SVG (jer je BPMN XML), uzimamo direktno response
-  // bpmn-js sam zna da učita iz stringa
-  new BpmnJS({ container: "#bpmn-container" }).importXML(xml).then(({ warnings }) => {
-    if (warnings.length) console.warn(warnings);
-    BpmnJS.instances[0].get("canvas").zoom("fit-viewport");
-  });
-};
+new BpmnJS({ container: "#canvas" }).importXML(bpmnXML).then(() => {
+  BpmnJS.instances[0].get("canvas").zoom("fit-viewport");
+});
 </script>
+
 </body>
 </html>
