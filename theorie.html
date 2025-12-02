@@ -57,15 +57,6 @@
       <p>Standardisiert · Direkt ausführbar in Camunda · Verständlich für Mensch und Maschine</p>
     </section>
 
-    <h3 style="text-align:center;margin:5rem 0 2rem;font-size:2.3rem">
-      Interaktives Beispiel: Pizza-Bestellung
-    </h3>
-    <p style="text-align:center;color:#555;margin-bottom:3rem">
-      Zoomen mit Mausrad • Verschieben mit Linksklick + Ziehen
-    </p>
-
-    <div id="canvas" class="bpmn-container"></div>
-
     <div style="text-align:center;margin:4rem 0">
       <a href="camunda.html" class="btn-primary">Weiter: Was ist Camunda 8? →</a>
     </div>
@@ -76,57 +67,6 @@
 <footer>
   <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de">info@camundaflow.de</a></p>
 </footer>
-
-<script>
-const bpmnXML = `<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
-                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
-                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
-                  id="Pizza" targetNamespace="http://bpmn.io/schema/bpmn">
-  <bpmn:collaboration id="C">
-    <bpmn:participant id="Gast" name="Gast" processRef="PG"/>
-    <bpmn:participant id="K" name="Kellner" processRef="PK"/>
-    <bpmn:participant id="Ko" name="Koch" processRef="PKo"/>
-  </bpmn:collaboration>
-  <bpmn:process id="PG"><bpmn:laneSet><bpmn:lane id="L1" name="Gast"/></bpmn:laneSet>
-    <bpmn:startEvent id="S" name="Ich hab Hunger"><bpmn:outgoing>f1</bpmn:outgoing></bpmn:startEvent>
-    <bpmn:userTask id="B" name="Pizza bestellen"><bpmn:incoming>f1</bpmn:incoming><bpmn:outgoing>f2</bpmn:outgoing></bpmn:userTask>
-  </bpmn:process>
-  <bpmn:process id="PK"><bpmn:laneSet><bpmn:lane id="L2" name="Kellner"/></bpmn:laneSet>
-    <bpmn:userTask id="A" name="Bestellung aufnehmen"><bpmn:incoming>f2</bpmn:incoming><bpmn:outgoing>f3</bpmn:outgoing></bpmn:userTask>
-    <bpmn:userTask id="Serv" name="Pizza servieren"><bpmn:incoming>f5</bpmn:incoming></bpmn:userTask>
-  </bpmn:process>
-  <bpmn:process id="PKo"><bpmn:laneSet><bpmn:lane id="L3" name="Koch"/></bpmn:laneSet>
-    <bpmn:serviceTask id="Back" name="Pizza backen"><bpmn:incoming>f3</bpmn:incoming><bpmn:outgoing>f5</bpmn:outgoing></bpmn:serviceTask>
-  </bpmn:process>
-  <bpmn:sequenceFlow id="f1" sourceRef="S" targetRef="B"/>
-  <bpmn:sequenceFlow id="f2" sourceRef="B" targetRef="A"/>
-  <bpmn:sequenceFlow id="f3" sourceRef="sat" targetRef="Back"/>
-  <bpmn:sequenceFlow id="f5" sourceRef="Back" targetRef="Serv"/>
-  <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="C">
-      <bpmndi:BPMNShape id="G" bpmnElement="Gast" isHorizontal="true"><dc:Bounds x="100" y="60" width="900" height="180"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="K" bpmnElement="K" isHorizontal="true"><dc:Bounds x="100" y="260" width="900" height="180"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Ko" bpmnElement="Ko" isHorizontal="true"><dc:Bounds x="100" y="460" width="900" height="180"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="S_di" bpmnElement="S"><dc:Bounds x="160" y="132" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="B_di" bpmnElement="B"><dc:Bounds x="280" y="110" width="100" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="A_di" bpmnElement="A"><dc:Bounds x="280" y="310" width="100" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Back_di" bpmnElement="Back"><dc:Bounds x="480" y="510" width="100" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Serv_di" bpmnElement="Serv"><dc:Bounds x="680" y="310" width="100" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="f1_di" bpmnElement="f1"><di:waypoint x="196" y="150"/><di:waypoint x="280" y="150"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f2_di" bpmnElement="f2"><di:waypoint x="380" y="150"/><di:waypoint x="330" y="150"/><di:waypoint x="330" y="350"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f3_di" bpmnElement="f3"><di:waypoint x="330" y="390"/><di:waypoint x="530" y="390"/><di:waypoint x="530" y="510"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f5_di" bpmnElement="f5"><di:waypoint x="580" y="550"/><di:waypoint x="730" y="550"/><di:waypoint x="730" y="390"/></bpmndi:BPMNEdge>
-    </bpmndi:BPMNPlane>
-  </bpmndi:BPMNDiagram>
-</bpmn:definitions>`;
-
-new BpmnJS({ container: "#canvas" }).importXML(bpmnXML).then(() => {
-  BpmnJS.instances[0].get("canvas").zoom("fit-viewport");
-});
-</script>
 
 </body>
 </html>
