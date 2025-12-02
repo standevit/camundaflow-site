@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                   xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                   xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                   xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+                   id="B2B_Complex"
+                   targetNamespace="http://bpmn.io/schema/bpmn">
+
+  <!-- Poruke -->
+  <bpmn:message id="Msg_BestellungErstellt" name="bestellung.erstellt"/>
+  <bpmn:message id="Msg_FreigabeErteilt" name="bestellung.freigegeben"/>
+  <bpmn:message id="Msg_ZahlungErhalten" name="zahlung.erhalten"/>
+  <bpmn:message id="Msg_VersandBestaetigt" name="versand.bestaetigt"/>
+
+  <bpmn:process id="B2BBestellung" isExecutable="true">
+
+    <!-- 4 Microservices kao Lane -->
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_Webshop" name="Webshop Service"/>
+      <bpmn:lane id="Lane_Freigabe" name="Freigabe Service"/>
+      <bpmn:lane id="Lane_Lager" name="Lager & Versand Service"/>
+      <bpmn:lane id="Lane_Mahnung" name="Mahnwesen"/>
+    </bpmn:laneSet>
+
+    <!-- === WEBSHOP SERVICE === -->
+    <bpmn:startEvent id="StartEvent" name="Kunde bestellt">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_Bestellen" name="Bestellung aufgeben">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:intermediateThrowEvent id="Throw_Bestellung" name="Bestellung erstellt">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_WaitForApproval</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Msg_BestellungErstellt"/>
+    </bpmn:intermediateThrowEvent>
+
+    <bpmn:intermediateCatchEvent id="Catch_Freigabe" name="Freigabe erhalten">
+      <bpmn:incoming>Flow_WaitForApproval</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Msg_FreigabeErteilt"/>
+      <camunda:in businessKey="${bestellnummer}"/>
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:userTask id="Task_Zahlung" name="Zahlung auslösen">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:intermediateThrowEvent id="Throw_Zahlung" name="Zahlung bestätigt">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:messageEventDefinition messageRef="Msg_ZahlungErhalten"/>
+    </bpmn:intermediateThrowEvent>
+
+    <!-- === FREIGABE SERVICE === -->
+    <bpmn:intermediateCatchEvent id="Catch_Bestellung" name="Bestellung empfangen">
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Msg_BestellungErstellt"/>
+      <camunda:in businessKey="${bestellnummer}"/>
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:userTask id="Task_Pruefen" name="Bestellung prüfen &amp; freigeben">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:boundaryEvent id="BoundaryTimer" attachedToRef="Task_Pruefen" cancelActivity="false">
+      <bpmn:outgoing>Flow_Escalate</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration>PT48H</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:userTask id="Task_Escalation" name="Escalation an GF">
+      <bpmn:incoming>Flow_Escalate</bpmn:incoming>
+    </bpmn:userTask>
+
+    <bpmn:intermediateThrowEvent id="Throw_Freigabe" name="Freigabe erteilt">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:messageEventDefinition messageRef="Msg_FreigabeErteilt"/>
+    </bpmn:intermediateThrowEvent>
+
+    <!-- === LAGER SERVICE === -->
+    <bpmn:intermediateCatchEvent id="Catch_Zahlung" name="Zahlung eingegangen">
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Msg_ZahlungErhalten"/>
+      <camunda:in businessKey="${bestellnummer}"/>
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:parallelGateway id="ParallelStart">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_Komm</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Versand</bpmn:outgoing>
+    </bpmn:parallelGateway>
+
+    <bpmn:serviceTask id="Task_Kommissionieren" name="Ware kommissionieren"/>
+    <bpmn:serviceTask id="Task_Versand" name="Versand beauftragen"/>
+    
+    <bpmn:parallelGateway id="ParallelEnd">
+      <bpmn:incoming>Flow_Komm</bpmn:incoming>
+      <bpmn:incoming>Flow_Versand</bpmn:incoming>
+      <bpmn:outgoing>Flow_10</bpmn:outgoing>
+    </bpmn:parallelGateway>
+
+    <bpmn:intermediateThrowEvent id="Throw_Versand" name="Versand bestätigt">
+      <bpmn:incoming>Flow_10</bpmn:incoming>
+      <bpmn:messageEventDefinition messageRef="Msg_VersandBestaetigt"/>
+    </bpmn:intermediateThrowEvent>
+
+    <!-- === MAHNWESEN (14 dana bez plaćanja) === -->
+    <bpmn:intermediateCatchEvent id="Catch_Timer14Tage" name="14 Tage ohne Zahlung">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Mahn</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration>P14D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:userTask id="Task_Mahnung" name="1. Mahnung versenden">
+      <bpmn:incoming>Flow_Mahn</bpmn:incoming>
+    </bpmn:userTask>
+
+    <!-- Kraj -->
+    <bpmn:endEvent id="EndEvent" name="Bestellung abgeschlossen"/>
+
+    <!-- SVI FLOWS -->
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent" targetRef="Task_Bestellen"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Bestellen" targetRef="Throw_Bestellung"/>
+    <bpmn:sequenceFlow id="Flow_WaitForApproval" sourceRef="Throw_Bestellung" targetRef="Catch_Freigabe"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Catch_Bestellung" targetRef="Task_Pruefen"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Pruefen" targetRef="Throw_Freigabe"/>
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Catch_Freigabe" targetRef="Task_Zahlung"/>
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Zahlung" targetRef="Throw_Zahlung"/>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Catch_Zahlung" targetRef="ParallelStart"/>
+    <bpmn:sequenceFlow id="Flow_Komm" sourceRef="ParallelStart" targetRef="Task_Kommissionieren"/>
+    <bpmn:sequenceFlow id="Flow_Versand" sourceRef="ParallelStart" targetRef="Task_Versand"/>
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="ParallelEnd" targetRef="Throw_Versand"/>
+    <bpmn:sequenceFlow id="Flow_Escalate" sourceRef="BoundaryTimer" targetRef="Task_Escalation"/>
+    <bpmn:sequenceFlow id="Flow_Mahn" sourceRef="Catch_Timer14Tage" targetRef="Task_Mahnung"/>
+
+  </bpmn:process>
+
+  <!-- Lijep layout -->
+  <bpmndi:BPMNDiagram id="diagram">
+    <bpmndi:BPMNPlane bpmnElement="B2BBestellung">
+      <bpmndi:BPMNShape bpmnElement="Lane_Webshop" isHorizontal="true">
+        <dc:Bounds x="160" y="60" width="1400" height="200"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="170" y="70" width="100" height="30"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Lane_Freigabe" isHorizontal="true">
+        <dc:Bounds x="160" y="260" width="1400" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Lane_Lager" isHorizontal="true">
+        <dc:Bounds x="160" y="420" width="1400" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Lane_Mahnung" isHorizontal="true">
+        <dc:Bounds x="160" y="580" width="1400" height="120"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Elementi (ključni) -->
+      <bpmndi:BPMNShape bpmnElement="StartEvent"><dc:Bounds x="212" y="142" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_Bestellen"><dc:Bounds x="320" y="110" width="120" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Throw_Bestellung"><dc:Bounds x="500" y="132" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Catch_Freigabe"><dc:Bounds x="620" y="132" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_Zahlung"><dc:Bounds x="740" y="110" width="120" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Throw_Zahlung"><dc:Bounds x="920" y="132" width="36" height="36"/></bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape bpmnElement="Catch_Bestellung"><dc:Bounds x="320" y="330" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_Pruefen"><dc:Bounds x="420" y="300" width="140" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Throw_Freigabe"><dc:Bounds x="620" y="330" width="36" height="36"/></bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape bpmnElement="Catch_Zahlung"><dc:Bounds x="320" y="490" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ParallelStart"><dc:Bounds x="500" y="490" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_Kommissionieren"><dc:Bounds x="620" y="460" width="120" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_Versand"><dc:Bounds x="620" y="540" width="120" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ParallelEnd"><dc:Bounds x="820" y="490" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Throw_Versand"><dc:Bounds x="920" y="490" width="36" height="36"/></bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape bpmnElement="Catch_Timer14Tage"><dc:Bounds x="500" y="642" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_Mahnung"><dc:Bounds x="620" y="610" width="140" height="80"/></bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
