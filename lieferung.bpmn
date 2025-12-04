@@ -3,12 +3,13 @@
   <bpmn:process id="LieferungProcess" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_Kunde" name="Kunde">
-        <bpmn:flowNodeRef>CatchEvent_LieferungErwartet</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>MessageEvent_NachrichtErhalten</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_Erhalten</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1ctjr7w</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_Bestellen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_Bestellen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0fnwkff</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_Erhalten</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>MessageEvent_NachrichtErhalten</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>CatchEvent_LieferungErwartet</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_Shop" name="Shop / Logistik">
         <bpmn:flowNodeRef>Task_VersandVorbereiten</bpmn:flowNodeRef>
@@ -36,6 +37,7 @@
       <bpmn:incoming>Flow_2</bpmn:incoming>
       <bpmn:incoming>Flow_10ewxz0</bpmn:incoming>
       <bpmn:outgoing>Flow_Warten</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0kcrhkc</bpmn:outgoing>
       <bpmn:messageEventDefinition />
     </bpmn:intermediateCatchEvent>
     <bpmn:boundaryEvent id="BoundaryTimer" name="Nach 30 Min erinnern" attachedToRef="Task_VersandVorbereiten">
@@ -64,7 +66,7 @@
     </bpmn:userTask>
     <bpmn:endEvent id="EndEvent_Erhalten" name="Notebook empfangen &#38; Glücklich">
       <bpmn:incoming>Flow_4</bpmn:incoming>
-      <bpmn:incoming>Flow_0lydmfn</bpmn:incoming>
+      <bpmn:incoming>Flow_1s3l6km</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_Bestellen" targetRef="Task_Bestellen" />
     <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Bestellen" targetRef="Task_VersandVorbereiten" />
@@ -74,7 +76,7 @@
     <bpmn:sequenceFlow id="Flow_Timer" sourceRef="BoundaryTimer" targetRef="IntermediateThrow_Message" />
     <bpmn:sequenceFlow id="Flow_Warten" sourceRef="CatchEvent_LieferungErwartet" targetRef="MessageEvent_NachrichtErhalten" />
     <bpmn:sequenceFlow id="Flow_12aq1lg" sourceRef="StartEvent_Bestellen" targetRef="Task_Bestellen" />
-    <bpmn:sequenceFlow id="Flow_0lydmfn" sourceRef="MessageEvent_NachrichtErhalten" targetRef="EndEvent_Erhalten" />
+    <bpmn:sequenceFlow id="Flow_0lydmfn" sourceRef="MessageEvent_NachrichtErhalten" targetRef="Gateway_0fnwkff" />
     <bpmn:sequenceFlow id="Flow_0b4125j" sourceRef="Task_VersandVorbereiten" targetRef="Task_VersandBestaetigen" />
     <bpmn:sequenceFlow id="Flow_18m84k5" sourceRef="Task_VersandBestaetigen" targetRef="IntermediateThrow_Message" />
     <bpmn:parallelGateway id="Gateway_1ctjr7w">
@@ -85,6 +87,13 @@
     <bpmn:sequenceFlow id="Flow_0gaed2g" sourceRef="Task_Bestellen" targetRef="Gateway_1ctjr7w" />
     <bpmn:sequenceFlow id="Flow_10ewxz0" sourceRef="Gateway_1ctjr7w" targetRef="CatchEvent_LieferungErwartet" />
     <bpmn:sequenceFlow id="Flow_1hf5gdm" sourceRef="Gateway_1ctjr7w" targetRef="MessageEvent_NachrichtErhalten" />
+    <bpmn:parallelGateway id="Gateway_0fnwkff">
+      <bpmn:incoming>Flow_0kcrhkc</bpmn:incoming>
+      <bpmn:incoming>Flow_0lydmfn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1s3l6km</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_0kcrhkc" sourceRef="CatchEvent_LieferungErwartet" targetRef="Gateway_0fnwkff" />
+    <bpmn:sequenceFlow id="Flow_1s3l6km" sourceRef="Gateway_0fnwkff" targetRef="EndEvent_Erhalten" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="diagram">
     <bpmndi:BPMNPlane bpmnElement="LieferungProcess">
@@ -94,49 +103,52 @@
       <bpmndi:BPMNShape bpmnElement="Lane_Kunde" isHorizontal="true">
         <dc:Bounds x="160" y="60" width="770" height="240" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="Task_VersandVorbereiten" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
-        <dc:Bounds x="340" y="380" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="IntermediateThrow_Message" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
-        <dc:Bounds x="742" y="402" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="722" y="438" width="76" height="40" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="CatchEvent_LieferungErwartet" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
-        <dc:Bounds x="642" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="634" y="64.5" width="52" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="MessageEvent_NachrichtErhalten" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
-        <dc:Bounds x="642" y="212" width="36" height="36" />
-        <bpmndi:BPMNLabel color:color="#831311">
-          <dc:Bounds x="632" y="248" width="56" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="EndEvent_Erhalten" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
-        <dc:Bounds x="772" y="212" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="758" y="248" width="67" height="40" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1ctjr7w_di" bpmnElement="Gateway_1ctjr7w">
-        <dc:Bounds x="515" y="155" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="Task_Bestellen" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
-        <dc:Bounds x="320" y="140" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="StartEvent_Bestellen" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="212" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="204" y="198" width="52" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_Bestellen" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="320" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_VersandVorbereiten" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="340" y="380" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="IntermediateThrow_Message" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="742" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="722" y="438" width="76" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="Task_VersandBestaetigen" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
         <dc:Bounds x="540" y="380" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ctjr7w_di" bpmnElement="Gateway_1ctjr7w">
+        <dc:Bounds x="515" y="155" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0fnwkff_di" bpmnElement="Gateway_0fnwkff">
+        <dc:Bounds x="705" y="145" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_Erhalten" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="802" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="788" y="188" width="67" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="MessageEvent_NachrichtErhalten" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="622" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="612" y="248" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CatchEvent_LieferungErwartet" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="622" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="614" y="65" width="52" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="BoundaryTimer" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
         <dc:Bounds x="422" y="342" width="36" height="36" />
@@ -149,8 +161,9 @@
         <di:waypoint x="320" y="180" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0lydmfn_di" bpmnElement="Flow_0lydmfn">
-        <di:waypoint x="678" y="230" />
-        <di:waypoint x="772" y="230" />
+        <di:waypoint x="658" y="230" />
+        <di:waypoint x="730" y="230" />
+        <di:waypoint x="730" y="195" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0b4125j_di" bpmnElement="Flow_0b4125j">
         <di:waypoint x="440" y="420" />
@@ -167,12 +180,21 @@
       <bpmndi:BPMNEdge id="Flow_10ewxz0_di" bpmnElement="Flow_10ewxz0">
         <di:waypoint x="540" y="155" />
         <di:waypoint x="540" y="120" />
-        <di:waypoint x="642" y="120" />
+        <di:waypoint x="622" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1hf5gdm_di" bpmnElement="Flow_1hf5gdm">
         <di:waypoint x="540" y="205" />
         <di:waypoint x="540" y="230" />
-        <di:waypoint x="642" y="230" />
+        <di:waypoint x="622" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kcrhkc_di" bpmnElement="Flow_0kcrhkc">
+        <di:waypoint x="658" y="120" />
+        <di:waypoint x="730" y="120" />
+        <di:waypoint x="730" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1s3l6km_di" bpmnElement="Flow_1s3l6km">
+        <di:waypoint x="755" y="170" />
+        <di:waypoint x="802" y="170" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
