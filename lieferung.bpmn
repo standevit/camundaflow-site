@@ -138,13 +138,13 @@
           <dc:Bounds x="788" y="188" width="67" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="MessageEvent_NachrichtErhalten" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+      <bpmndi:BPMNShape bpmnElement="MessageEvent_NachrichtErhalten" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
         <dc:Bounds x="622" y="212" width="36" height="36" />
-        <bpmndi:BPMNLabel color:color="#831311">
+        <bpmndi:BPMNLabel color:color="#5b176d">
           <dc:Bounds x="612" y="248" width="56" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="CatchEvent_LieferungErwartet" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+      <bpmndi:BPMNShape bpmnElement="CatchEvent_LieferungErwartet" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
         <dc:Bounds x="622" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="614" y="65" width="52" height="27" />
