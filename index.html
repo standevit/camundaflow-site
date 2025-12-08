@@ -6,6 +6,8 @@
   <title>Camunda Flow – Prozessautomatisierung & BPM Experte</title>
   <meta name="description" content="Camunda Experte aus Deutschland – Beratung, Implementierung und Custom-Entwicklung mit Camunda 8">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/bpmn-js@17.8.1/dist/bpmn-navigated-viewer.development.js"></script>
+
 </head>
 <body class="home">
 <header>
@@ -25,6 +27,19 @@
   </nav>
 </header>
 
+<div class="container">
+  <!-- Lijevi Meni -->
+  <aside class="sidebar">
+    <h3>Beispiele auswählen</h3>
+    <ul>
+      <li><a href="#" class="example-link active" data-diagram="pizza.bpmn">Pizza Bestellung</a></li>
+      <li><a href="#" class="example-link" data-diagram="order-approval-process.bpmn">Order Approval</a></li>
+      <li><a href="#" class="example-link" data-diagram="lieferung.bpmn">Event Driven Process</a></li>
+      <li><a href="#" class="example-link" data-diagram="b2bbestellung.bpmn">Wehshop Service</a></li>
+    </ul>
+  </aside>
+
+  <!-- Glavni sadržaj -->
 <main>
   <div class="card">
     <h2>Camunda Flow</h2>
@@ -37,12 +52,52 @@
     <p style="text-align:center;max-width:700px;margin:0 auto 3rem">
       Ich helfe Unternehmen, komplexe Geschäftsprozesse zu automatisieren – schnell, skalierbar und zukunftssicher mit der führenden Open-Source BPMN-Engine.
     </p>
+
+<div id="canvas" class="bpmn-container"></div>
+
     <a href="mailto:info@camundaflow.de" class="btn-primary">Jetzt Kontakt aufnehmen</a>
   </div>
 </main>
+</div>
 
 <footer>
   <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de">info@camundaflow.de</a></p>
 </footer>
+
+<script>
+
+const viewer = new BpmnJS({ container: '#canvas' });
+
+// učitaj default
+loadDiagram('pizza.bpmn');
+
+// klik handler
+document.querySelectorAll('.example-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const file = link.getAttribute('data-diagram');
+
+    document.querySelectorAll('.example-link').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+
+    loadDiagram(file);
+  });
+});
+
+function loadDiagram(fileName) {
+
+  fetch(fileName)
+    .then(response => response.text())
+    .then(xml => viewer.importXML(xml))
+    .then(() => {
+      const canvas = viewer.get('canvas');
+      canvas.zoom('fit-viewport', { padding: 50 });
+    })
+    .catch(err => console.error('Problem pri učitavanju/BPMN importu:', err));
+}
+
+</script>
+
 </body>
 </html>
