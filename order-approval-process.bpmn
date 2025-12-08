@@ -47,10 +47,10 @@
     <bpmn:sequenceFlow id="Flow_05" sourceRef="ServiceTask_Confirmation" targetRef="EndEvent" />
     <bpmn:sequenceFlow id="Flow_04090ac" sourceRef="StartEvent" targetRef="UserTask_Fachbereich" />
     <bpmn:sequenceFlow id="Flow_0pw2vr7" sourceRef="UserTask_Fachbereich" targetRef="Gateway_Amount" />
-    <bpmn:sequenceFlow id="Flow_117amuj" sourceRef="Gateway_Amount" targetRef="UserTask_GF">
+    <bpmn:sequenceFlow id="Flow_117amuj" name="Ja" sourceRef="Gateway_Amount" targetRef="UserTask_GF">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" />
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1j58788" sourceRef="Gateway_Amount" targetRef="ServiceTask_Confirmation" />
+    <bpmn:sequenceFlow id="Flow_1j58788" name="Nein" sourceRef="Gateway_Amount" targetRef="ServiceTask_Confirmation" />
     <bpmn:sequenceFlow id="Flow_18phx5h" sourceRef="ServiceTask_Confirmation" targetRef="EndEvent" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -67,7 +67,7 @@
       <bpmndi:BPMNShape id="Gateway_Amount_di" bpmnElement="Gateway_Amount" isMarkerVisible="true">
         <dc:Bounds x="480" y="195" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="540" y="213" width="88" height="14" />
+          <dc:Bounds x="541" y="213" width="88" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_GF_di" bpmnElement="UserTask_GF" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
@@ -94,11 +94,17 @@
         <di:waypoint x="505" y="195" />
         <di:waypoint x="505" y="140" />
         <di:waypoint x="600" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="514" y="165" width="13" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1j58788_di" bpmnElement="Flow_1j58788">
         <di:waypoint x="505" y="245" />
         <di:waypoint x="505" y="320" />
         <di:waypoint x="600" y="320" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="509" y="280" width="23" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18phx5h_di" bpmnElement="Flow_18phx5h">
         <di:waypoint x="720" y="320" />

@@ -6,6 +6,8 @@
   <title>AI Agents mit Camunda 8 – Camunda Flow</title>
   <meta name="description" content="Autonome AI Agents in Camunda 8 – Langlaufende, zustandsbehaftete Prozesse mit LLM-Integration">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/bpmn-js@17.8.1/dist/bpmn-navigated-viewer.development.js"></script>
+
 </head>
 <body class="home">
 <header>
@@ -25,6 +27,19 @@
   </nav>
 </header>
 
+<div class="container">
+  <!-- Lijevi Meni -->
+  <aside class="sidebar">
+    <h3>Beispiele auswählen</h3>
+    <ul>
+      <li><a href="#" class="example-link active" data-diagram="pizza.bpmn">Pizza Bestellung</a></li>
+      <li><a href="#" class="example-link" data-diagram="order-approval-process.bpmn">Order Approval</a></li>
+      <li><a href="#" class="example-link" data-diagram="lieferung.bpmn">Event Driven Process</a></li>
+      <li><a href="#" class="example-link" data-diagram="b2bbestellung.bpmn">Wehshop Service</a></li>
+    </ul>
+  </aside>
+
+  <!-- Glavni sadržaj -->
 <main>
   <div class="card">
     <h2>AI Agents mit Camunda 8</h2>
@@ -63,8 +78,14 @@
         AI Agent Projekt anfragen
       </a>
     </section>
+
+    <div id="canvas" class="bpmn-container"></div>
+
   </div>
 </main>
+</div>
+
+<script src="load-diagram.js"></script>
 
 <footer>
   <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de">info@camundaflow.de</a></p>
