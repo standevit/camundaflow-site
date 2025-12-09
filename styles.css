@@ -52,7 +52,7 @@ main{flex:1;padding:0rem 1rem 4rem;max-width:1000px;margin:0 auto;width:100%}
 .card{
   background:white;padding:3.6rem 2.6rem;border-radius:1.5rem;
   box-shadow:0 12px 40px rgba(0,0,0,0.07);
-  border:1px solid #e2e8f0;text-align:center;
+  border:1px solid #e2e8f0;text-align:left;
 }
 
 /* Naslovi – još malo manji */
@@ -82,7 +82,7 @@ p:nth-of-type(2){
 
 /* Liste */
 ul li{
-  list-style:square;position:relative;padding-left:1.8rem;
+  list-style:square;position:relative;padding-left:1.2rem;
   font-size:1.13rem;color:#475569;margin-bottom:1rem;
 }
 

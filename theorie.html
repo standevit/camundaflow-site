@@ -43,10 +43,10 @@
   <aside class="sidebar">
     <h3>Beispiele auswählen</h3>
     <ul>
-      <li><a href="#" class="example-link active" data-diagram="pizza.bpmn">Pizza Bestellung</a></li>
-      <li><a href="#" class="example-link" data-diagram="order-approval-process.bpmn">Order Approval</a></li>
-      <li><a href="#" class="example-link" data-diagram="lieferung.bpmn">Event Driven Process</a></li>
-      <li><a href="#" class="example-link" data-diagram="b2bbestellung.bpmn">Wehshop Service</a></li>
+      <li><a href="#" class="example-link active" data-template="process-basics.html">Prozessmodellierung</a></li>
+      <li><a href="#" class="example-link" data-template="workflow-automation.html">Workflow Automation</a></li>
+      <li><a href="#" class="example-link" data-template="process-orchestration.html">Process Orchestration</a></li>
+      <li><a href="#" class="example-link" data-template="human-centric.html">User Tasks & Cockpit</a></li>
     </ul>
   </aside>
 
@@ -54,25 +54,9 @@
 <main>
   <div class="card">
 
-    <h2>Theorie: BPMN 2.0</h2>
+    
 
-    <section style="text-align:left;max-width:900px;margin:3rem auto;line-height:1.7">
-      <h3>Was ist BPMN?</h3>
-      <p><strong>Business Process Model and Notation (BPMN 2.0)</strong> ist der weltweite Standard zur grafischen Darstellung von Geschäftsprozessen. Er ermöglicht es Fachabteilungen und IT, Prozesse einheitlich zu modellieren, zu verstehen und automatisieren.</p>
-
-      <h3>Wichtige Elemente</h3>
-      <ul>
-        <li><strong>Events</strong> (Kreise) – Start-, Zwischen- und Endereignisse</li>
-        <li><strong>Tasks</strong> (abgerundete Rechtecke) – Arbeitsschritte</li>
-        <li><strong>Gateways</strong> (Diamanten) – Entscheidungen</li>
-        <li><strong>Swimlanes</strong> – Zuständigkeiten</li>
-      </ul>
-
-      <h3>Vorteile</h3>
-      <p>Standardisiert · Direkt ausführbar in Camunda · Verständlich für Mensch und Maschine</p>
-    </section>
-
-    <div id="canvas" class="bpmn-container"></div>
+    <div id="canvas"></div>
 
     <div style="text-align:center;margin:4rem 0">
       <a href="camunda.html" class="btn-primary">Weiter: Was ist Camunda 8? →</a>
@@ -83,6 +67,10 @@
 </div>
 
 <script src="load-diagram.js"></script>
+
+<script>// Startseite laden
+loadPage('theorie-tmp.html');
+</script>
 
 <footer>
   <p>© 2025 Camunda Flow • <a href="mailto:info@camundaflow.de">info@camundaflow.de</a></p>
