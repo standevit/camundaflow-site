@@ -1,2 +1,7 @@
 # Local Netlify folder
 .netlify
+
+# === Environment variables ===
+.env.local
+.env.*.local    # hvata i .env.development.local, .env.production.local itd.
+.env           # opcionalno – ako želiš da sakriješ i običan .env
